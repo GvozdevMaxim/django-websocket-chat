@@ -1,0 +1,53 @@
+# Окружение Python
+.vscode/
+.idea/
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Виртуальное окружение
+.venv/
+env/
+venv/
+
+# Конфигурационные файлы и секретные данные
+.env
+.env.local
+.env.*.local
+instance/
+config/settings_local.py
+
+# Лог-файлы
+*.log
+logs/
+debug.log
+
+# База данных
+db.sqlite3
+db.sqlite3-journal
+pg_data/
+
+# Миграции
+*/migrations/*
+
+# Кеш Django
+*.cache
+*.mo
+*.pot
+
+# Статика и медиафайлы
+staticfiles/
+media/
+static/
+
+# Docker
+*.db
+*.pid
+*.tar
+__docker_cache__/
+docker-compose.override.yml
+
+# PyCharm
+*.iml
+*.idea/
