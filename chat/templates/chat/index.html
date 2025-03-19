@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room: {{ room_name }}</title>
+    <link rel="stylesheet" href="{% static 'chat/chat.css' %}">
+    <script src="{% static 'chat/chat.js' %}"></script>
+</head>
+<body>
+    <header>
+        <h2>Chat Room: {{ room_name }}</h2>
+    </header>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+        <button id="send-button">Send</button>
+    </div>
+
+    <!-- Передаем переменную room_name в JavaScript через data атрибут -->
+    <div id="room-data" data-room-name="{{ room_name }}"></div>
+</body>
+</html>

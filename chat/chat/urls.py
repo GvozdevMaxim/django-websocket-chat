@@ -17,15 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from api.views import CreateRoom, JoinRoom, DeleteRoom
-
-
+from api.views import CreateRoom, JoinRoom, DeleteRoom, chat_view
+from django.conf.urls.static import static
+from . import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
     path('createroom/', CreateRoom.as_view(), name='create-room'),
     path('joinroom/<str:name>/', JoinRoom.as_view(), name='join-room'),
-    path('deleteroom/<str:name>/', DeleteRoom.as_view(), name='delete-room')
+    path('deleteroom/<str:name>/', DeleteRoom.as_view(), name='delete-room'),
+    path('chat/<str:name>/', chat_view, name='chat-room'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

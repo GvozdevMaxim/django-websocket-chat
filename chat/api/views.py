@@ -1,8 +1,12 @@
+import os
+
 from rest_framework import generics, status, permissions
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework.response import Response
 from .models import Room
 from .serializers import RoomCreateSerializer, JoinRoomSerializer
+
+
 
 class JoinRoom(generics.GenericAPIView):
     serializer_class = JoinRoomSerializer
@@ -52,5 +56,11 @@ class DeleteRoom(generics.DestroyAPIView):
                 status=status.HTTP_403_FORBIDDEN
             )
 
+
         room.delete()
         return Response({"message": "Комната удалена"}, status=status.HTTP_204_NO_CONTENT)
+
+
+def chat_view(request, name):
+    room = get_object_or_404(Room, name=name)
+    return render(request, "chat/index.html", {'room_name': name})
