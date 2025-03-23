@@ -7,13 +7,13 @@ class Room(models.Model):
     name = models.CharField(max_length=255, unique=True)
     time_create = models.DateField(auto_now_add=True)
     password = models.CharField(max_length=128, blank=True, null=True)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_rooms")  # Владелец комнаты
-    users = models.ManyToManyField(User, related_name="joined_rooms")  # Участники
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owned_rooms")
+    users = models.ManyToManyField(User, related_name="joined_rooms")
 
     def perform_create(self, serializer):
         """Устанавливаем владельца и добавляем его в участники"""
-        room = serializer.save(owner=self.request.user)  # Устанавливаем владельца
-        room.users.add(self.request.user)  # Добавляем в участники
+        room = serializer.save(owner=self.request.user)
+        room.users.add(self.request.user)
 
     class Meta:
         ordering = ['-time_create']
@@ -28,12 +28,10 @@ class Room(models.Model):
     def check_password(self, raw_password):
         return check_password(raw_password, self.password)
 
-
     def __str__(self):
         return f"{self.name}, Created at: {self.time_create}"
 
 
-# Create your models here.
 class Message(models.Model):
     text = models.TextField(max_length=264)
     time_create = models.DateField(auto_now_add=True)
@@ -41,9 +39,9 @@ class Message(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['-time_create']
+        ordering = ['time_create']
         indexes = [
-            models.Index(fields=['-time_create'])
+            models.Index(fields=['time_create'])
         ]
 
     def __str__(self):

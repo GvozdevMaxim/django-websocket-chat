@@ -1,11 +1,8 @@
-import os
-
 from rest_framework import generics, status, permissions
 from django.shortcuts import get_object_or_404, render
 from rest_framework.response import Response
 from .models import Room
 from .serializers import RoomCreateSerializer, JoinRoomSerializer
-
 
 
 class JoinRoom(generics.GenericAPIView):
@@ -16,7 +13,7 @@ class JoinRoom(generics.GenericAPIView):
         name = self.kwargs.get('name')
         return get_object_or_404(Room, name=name)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         room = self.get_object()
 
         # Проверяем, есть ли пользователь уже в комнате
@@ -49,13 +46,11 @@ class DeleteRoom(generics.DestroyAPIView):
     def delete(self, request, *args, **kwargs):
         room = self.get_object()
 
-        # Только владелец может удалить комнату
         if room.owner != request.user:
             return Response(
                 {"error": "Вы не являетесь создателем комнаты"},
                 status=status.HTTP_403_FORBIDDEN
             )
-
 
         room.delete()
         return Response({"message": "Комната удалена"}, status=status.HTTP_204_NO_CONTENT)

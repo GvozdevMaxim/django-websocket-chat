@@ -29,7 +29,6 @@ DEBUG = os.getenv("DEBUG")
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",") if os.getenv("ALLOWED_HOSTS") else []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    "daphne",  # Daphne для работы с ASGI
+    "daphne",
     'django.contrib.staticfiles',
-    'api',  # 👈 Добавь это, если не прописано
+    'api',
     'rest_framework',
     "channels",
 
@@ -74,14 +73,13 @@ TEMPLATES = [
     },
 ]
 
-ASGI_APPLICATION = "chat.asgi.application"  # Проверь, чтобы было так!
+ASGI_APPLICATION = "chat.asgi.application"
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",  # Или используй Redis
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
     }
 }
-
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -96,7 +94,6 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -116,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -130,17 +126,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Путь, куда будут собираться статика
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Путь к вашим статическим файлам в проекте
+    os.path.join(BASE_DIR, 'static'),
 ]
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-

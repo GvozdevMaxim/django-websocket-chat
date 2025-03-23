@@ -23,7 +23,7 @@ class JoinRoomSerializer(serializers.Serializer):
     def validate(self, data):
         """Проверяем правильность пароля"""
         room = self.context['room']
-        if room.password and not room.check_password(data['password']):  # Теперь check_password работает
+        if room.password and not room.check_password(data['password']):
             raise serializers.ValidationError("Неверный пароль")
         return data
 

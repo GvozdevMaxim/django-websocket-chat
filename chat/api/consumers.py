@@ -91,7 +91,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     async def send_chat_history(self):
         """Отправка истории сообщений при подключении"""
         messages = await sync_to_async(list)(
-            Message.objects.filter(room=self.room).select_related("user").order_by("time_create")[:50]
+            Message.objects.filter(room=self.room).select_related("user").order_by("time_create")[:200]
         )
 
         print(f"[DEBUG] Найдено {len(messages)} сообщений для комнаты {self.room.name}")
