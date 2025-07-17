@@ -1,13 +1,19 @@
 from django.contrib import admin
-
-from .models import Room
+from .models import Room, Message
 
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ("name", "time_create")  # Показываем имя комнаты и дату создания
-    search_fields = ("name", )  # Поиск по имени комнаты
-    ordering = ("-time_create", )  # Сортировка от новых к старым
-    readonly_fields = ("time_create", )  # Поле только для чтения
+    list_display = ("name", "owner", "time_create")
+    search_fields = ("name", "owner__username")
+    ordering = ("-time_create",)
+    readonly_fields = ("time_create",)
+    filter_horizontal = ("users",)
 
 
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ("user", "room", "text", "time_create")
+    search_fields = ("text", "user__username", "room__name")
+    ordering = ("-time_create",)
+    readonly_fields = ("time_create",)

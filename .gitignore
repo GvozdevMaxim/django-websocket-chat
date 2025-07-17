@@ -12,7 +12,7 @@ env/
 venv/
 
 # Конфигурационные файлы и секретные данные
-.env
+chat/.env
 .env.local
 .env.*.local
 instance/
@@ -51,3 +51,4 @@ docker-compose.override.yml
 # PyCharm
 *.iml
 *.idea/
+/chat/my_ideas

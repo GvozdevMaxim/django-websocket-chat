@@ -13,17 +13,15 @@ class JoinRoom(generics.GenericAPIView):
         name = self.kwargs.get('name')
         return get_object_or_404(Room, name=name)
 
-    def post(self, request):
+    def post(self, request, name):
         room = self.get_object()
 
-        # Проверяем, есть ли пользователь уже в комнате
         if request.user in room.users.all():
             return Response({"message": "Вы уже в этой комнате"}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer = self.get_serializer(data=request.data, context={'room': room})
         serializer.is_valid(raise_exception=True)
 
-        # Добавляем пользователя в комнату
         room.users.add(request.user)
 
         return Response({"message": "Вы успешно присоединились к комнате"}, status=status.HTTP_200_OK)

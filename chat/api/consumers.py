@@ -1,8 +1,8 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
-from django.contrib.auth.models import User
 from asgiref.sync import sync_to_async
 from .models import Room, Message
+
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -116,3 +116,5 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             print(f"[ERROR] Ошибка при сохранении сообщения от {user}: {e}")
             return None
+
+

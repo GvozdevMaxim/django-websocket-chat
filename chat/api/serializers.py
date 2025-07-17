@@ -6,14 +6,14 @@ class RoomCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ['id','name', 'password', 'owner']
-        read_only_fields = ['owner']
+        read_only_fields = ['id', 'owner']
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         room = Room.objects.create(**validated_data)
 
         if password:
-            room.set_password(password)  # Хешируем пароль
+            room.set_password(password)
         return room
 
 
