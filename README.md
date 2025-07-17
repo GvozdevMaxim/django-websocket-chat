@@ -70,16 +70,19 @@ source .venv/bin/activate  # Linux/macOS
 ```bash
 pip install -r requirements.txt
 ```
+
 # Создайте файл .env в корне проекта и заполните его примерно так:
-"SECRET_KEY=django-secret-key"
-"ALLOWED_HOSTS=127.0.0.1,localhost"
-"DEBUG=True"
-"DB_NAME=chat_database"
-"DB_USER=chat_user"
-"DB_PASSWORD=S3cureP@ssw0rd!"
-"DB_HOST=localhost"
-"DB_PORT=5432"
-.
+```ini
+SECRET_KEY=django-secret-key
+ALLOWED_HOSTS=127.0.0.1,localhost
+DEBUG=True
+DB_NAME=chat_database
+DB_USER=chat_user
+DB_PASSWORD=S3cureP@ssw0rd!
+DB_HOST=localhost
+DB_PORT=5432
+```
+
 # Запустить миграции
 ```bash
 python manage.py migrate
