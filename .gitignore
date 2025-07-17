@@ -51,4 +51,4 @@ docker-compose.override.yml
 # PyCharm
 *.iml
 *.idea/
-/chat/my_ideas
+
